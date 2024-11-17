@@ -1,9 +1,12 @@
 #include <Arduino.h>
 #include <DFRobotDFPlayerMini.h>
 
+#include "angel_carol_payer.h"
 
-//HardwareSerial Serial1(PB_7, PB_6);
+HardwareSerial Serial1(PB_7, PB_6);
+
 DFRobotDFPlayerMini DFPlayer;
+AngelCarolPlayer ACPlayer;
 
 void setup()
 {
@@ -16,8 +19,8 @@ void setup()
       delay(0); // Code to compatible with ESP8266 watch dog.  
     }
   }
-  DFPlayer.volume(30);  //Set volume value. From 0 to 30
-  
+  DFPlayer.volume(0);  //Set volume value. From 0 to 30
+  ACPlayer.begin(&DFPlayer);
 
 }
 
@@ -28,8 +31,14 @@ void loop()
   //digitalWrite(PA_8, LOW);
   //delay(1000);
 
-  if(digitalRead(PB_10) == HIGH) {
-    DFPlayer.play(1);  
+  //if(digitalRead(PB_10) == HIGH) {
+  //  DFPlayer.play(1);  
+  //}
+
+  if(digitalRead(PB_10) == LOW) {
+    ACPlayer.insertCoin();
   }
+
+  ACPlayer.process();
 
 }

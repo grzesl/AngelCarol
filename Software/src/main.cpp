@@ -10,8 +10,6 @@ AngelCarolPlayer ACPlayer;
 
 void setup()
 {
-  pinMode(PA_8, OUTPUT);
-  pinMode(PB_10, INPUT);
 
   Serial1.begin(9600);
   if (!DFPlayer.begin(Serial1)) {
@@ -22,14 +20,17 @@ void setup()
   DFPlayer.volume(0);  //Set volume value. From 0 to 30
   ACPlayer.begin(&DFPlayer);
 
+  pinMode(PA_8, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(PB_10, INPUT);
+
+
 }
 
 void loop()
 {
-  //digitalWrite(PA_8, HIGH);
-  //delay(1000);
-  //digitalWrite(PA_8, LOW);
-  //delay(1000);
+
+
 
   //if(digitalRead(PB_10) == HIGH) {
   //  DFPlayer.play(1);  

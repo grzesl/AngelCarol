@@ -15,8 +15,9 @@ class PlayerEvent
 private:
     INTERNAL_EVENTS event;
     int track;
-    int duration;
-    int start_time;
+    unsigned int duration;
+    unsigned int start_time;
+    int is_terminated;
 public:
     PlayerEvent(INTERNAL_EVENTS event, int track, int duration);
     ~PlayerEvent();

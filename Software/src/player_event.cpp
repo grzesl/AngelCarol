@@ -5,6 +5,7 @@ PlayerEvent::PlayerEvent(INTERNAL_EVENTS in_event, int in_track, int in_duration
     event = in_event;
     track = in_track;
     duration = in_duration;
+    is_terminated = 0;
 }
 
 
@@ -20,6 +21,7 @@ void PlayerEvent::start() {
 void PlayerEvent::terminate() 
 {
     duration = 0;
+    is_terminated = 1;
 }
 
 int PlayerEvent::getProgress (int max_value, int reverse) {
@@ -49,7 +51,10 @@ int PlayerEvent::getProgress (int max_value, int reverse) {
 
 int PlayerEvent::isPending()
 {
-    int elpasserd = millis() - start_time;
+    if(is_terminated)
+        return 0;
+
+    unsigned int elpasserd = millis() - start_time;
 
     if(elpasserd > duration)
         return 0;

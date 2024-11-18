@@ -6,13 +6,13 @@ AngelCarolPlayer::AngelCarolPlayer(/* args */)
 {
     //default values;
     currentEvent = NULL;
-    max_volume = 30; //30 max
-    max_carol_duration_ms = 30000; //30 sec
-    max_intro_duration_ms = 10000; //10 sec
+    max_volume = 26; //30 max
+    max_carol_duration_ms = 20000; //30 sec
+    max_intro_duration_ms = 5000; //10 sec
     fade_out_duration_ms = 2000; //2 sec
     fade_in_duration_ms = 1000; //1 sec
     current_track = 0; //none
-    max_track_no = 1;
+    max_track_no = 15;
     last_insert_coint_time = 0;
 
     curr_volume = 0;
@@ -27,9 +27,9 @@ AngelCarolPlayer::~AngelCarolPlayer()
 void AngelCarolPlayer::insertCoin()
 {
     unsigned int elpassed = millis() - last_insert_coint_time;
-    if(elpassed < 2000)
+    if(elpassed < 5000) //must be 
         return;
-
+    digitalWrite(PA_8, HIGH);
     last_insert_coint_time = millis();
 
     current_track = suffle();
@@ -49,6 +49,8 @@ void AngelCarolPlayer::process()
         }
     }
 
+   
+
     if(currentEvent == NULL) {
         return;
     }
@@ -57,26 +59,28 @@ void AngelCarolPlayer::process()
     switch(currentEvent->getType()) {
         case EVT_FADE_IN:
             new_volume = currentEvent->getProgress(max_volume, 0);
-            if(curr_volume != new_volume){
-                for(int i = 0;i < new_volume - curr_volume;i++)
-                    dfplayer->volumeUp();
-            }
+            if(curr_volume != new_volume)
+                dfplayer->volume(new_volume);
+
             curr_volume = new_volume;
-            
         break;
         case EVT_FADE_OUT:
             new_volume = currentEvent->getProgress(max_volume, 1);
-            if(curr_volume != new_volume){
-                for(int i = 0;i < curr_volume - new_volume;i++)
-                    dfplayer->volumeDown();
-            }
+            if(curr_volume != new_volume)
+                dfplayer->volume(new_volume);
             curr_volume = new_volume;
 
            if(!currentEvent->isPending())
+           {
                 dfplayer->stop();
+                delay(100);
+           }
         break;
         case EVT_PLAY:
            // dfplayer->play(currentEvent->getTrack());
+            delay(10);
+            if(currentEvent->isPending())
+                digitalWrite(PA_8, LOW);
         break;
         default:
             dfplayer->stop();

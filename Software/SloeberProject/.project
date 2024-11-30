@@ -32,6 +32,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>src</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/src</locationURI>
+		</link>
+		<link>
 			<name>core/core</name>
 			<type>2</type>
 			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/STMicroelectronics/hardware/stm32/2.8.1/cores/arduino</locationURI>
@@ -40,6 +45,11 @@
 			<name>core/variant</name>
 			<type>2</type>
 			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/STMicroelectronics/hardware/stm32/2.8.1/variants/STM32C0xx/C011D6Y_C011F(4-6)(P-U)_C031F(4-6)P</locationURI>
+		</link>
+		<link>
+			<name>libraries/DFRobotDFPlayerMini</name>
+			<type>2</type>
+			<locationURI>ECLIPSE_HOME/arduinoPlugin/libraries/DFRobotDFPlayerMini/1.0.6</locationURI>
 		</link>
 		<link>
 			<name>libraries/SrcWrapper</name>

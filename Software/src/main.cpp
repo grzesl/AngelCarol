@@ -2,15 +2,43 @@
 #include <DFRobotDFPlayerMini.h>
 
 #include "angel_carol_payer.h"
+#include "board_def.h"
 
-HardwareSerial Serial1(PB_7, PB_6);
+
+#ifdef STM32C0xx
+	HardwareSerial Serial1(PB_7, PC_14);
+#else
+	HardwareSerial Serial1(PB_7, PB_6);
+#endif
+
 
 DFRobotDFPlayerMini DFPlayer;
 AngelCarolPlayer ACPlayer;
 
+volatile int coinCounter = 0;
+
+void coinIrq()
+{
+	if(digitalRead(COIN_DET) == HIGH) // re read to filter spikes
+		coinCounter++;
+}
+
+int getCoinCount(void)
+{
+	volatile int ret;
+
+    noInterrupts();
+		ret = coinCounter;
+		coinCounter = 0;
+    interrupts();
+
+	return ret;
+}
+
+
+
 void setup()
 {
-
   Serial1.begin(9600);
   if (!DFPlayer.begin(Serial1)) {
     while(true){
@@ -20,26 +48,50 @@ void setup()
   DFPlayer.volume(0);  //Set volume value. From 0 to 30
   ACPlayer.begin(&DFPlayer);
 
-  pinMode(PA_8, OUTPUT);
-  pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(PB_10, INPUT);
+
+  pinMode(BOARD_LED, OUTPUT); // hart beat
+  pinMode(RELAY, OUTPUT);
+  pinMode(VOL_SET, INPUT);
+  pinMode(TIME_SET, INPUT);
+
+  pinMode(COIN_DET, INPUT);
+  attachInterrupt(COIN_DET,coinIrq,RISING);
 
 
+  interrupts(); // enable interrupts
 }
 
 void loop()
 {
 
+  digitalWrite(BOARD_LED, HIGH);
 
+  uint32_t volume_set    = analogRead(VOL_SET)/34; // (0-1023)/34 = 0-30
+  uint32_t max_play_time = analogRead(TIME_SET)*50;// 0-1023
 
-  //if(digitalRead(PB_10) == HIGH) {
-  //  DFPlayer.play(1);  
-  //}
+  static uint32_t previous_volume = 0;
+  static uint32_t previous_duration = 0;
+  if(volume_set>30)
+	  volume_set = 30;
 
-  if(digitalRead(PB_10) == LOW) {
-    ACPlayer.insertCoin();
+  if(previous_volume!=volume_set)
+  {
+	  ACPlayer.setVolume(volume_set);
+    previous_volume = volume_set;
+  }
+  
+  if(previous_duration!=max_play_time)
+  {
+  	ACPlayer.setCarolDuration(max_play_time);
+    previous_duration = max_play_time;
+  } 
+  
+  if(getCoinCount()) {
+	  digitalWrite(RELAY, HIGH);
+	  ACPlayer.insertCoin();
   }
 
   ACPlayer.process();
 
+  digitalWrite(BOARD_LED, LOW);
 }

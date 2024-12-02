@@ -10,7 +10,7 @@ AngelCarolPlayer::AngelCarolPlayer(/* args */)
     max_carol_duration_ms = 20000; //30 sec
     max_intro_duration_ms = 5000; //10 sec
     fade_out_duration_ms = 2000; //2 sec
-    fade_in_duration_ms = 1000; //1 sec
+    fade_in_duration_ms = 400; //1 sec
     current_track = 0; //none
     max_track_no = 15;
     last_insert_coint_time = 0;
@@ -98,6 +98,7 @@ void AngelCarolPlayer::process()
 void AngelCarolPlayer::setVolume(int volume)
 {
     max_volume = volume;
+    dfplayer->volume(max_volume);
 }
 
 void AngelCarolPlayer::setCarolDuration(int duration_ms)
@@ -122,9 +123,9 @@ void AngelCarolPlayer::begin(DFRobotDFPlayerMini * in_dfplayer)
 
 void AngelCarolPlayer::playIntro()
 {
-    events.push_back(new PlayerEvent(EVT_FADE_IN, 1, fade_in_duration_ms));
-    events.push_back(new PlayerEvent(EVT_PLAY, 1, max_intro_duration_ms));
-    events.push_back(new PlayerEvent(EVT_FADE_OUT, 1, fade_out_duration_ms));
+    events.push_back(new PlayerEvent(EVT_FADE_IN, WELCOME, fade_in_duration_ms));
+    events.push_back(new PlayerEvent(EVT_PLAY, WELCOME, max_intro_duration_ms));
+    events.push_back(new PlayerEvent(EVT_FADE_OUT, WELCOME, fade_out_duration_ms));
 }
 
 void AngelCarolPlayer::playCarol(int track_no)
@@ -133,6 +134,10 @@ void AngelCarolPlayer::playCarol(int track_no)
       //mark current event as expired;
       currentEvent->terminate();
     }
+    events.push_back(new PlayerEvent(EVT_FADE_IN, GOOD_BLESS_YOU, 100));
+    events.push_back(new PlayerEvent(EVT_PLAY, GOOD_BLESS_YOU, 2000));
+    events.push_back(new PlayerEvent(EVT_FADE_OUT, GOOD_BLESS_YOU, 100));
+
     events.push_back(new PlayerEvent(EVT_FADE_IN, track_no, fade_in_duration_ms));
     events.push_back(new PlayerEvent(EVT_PLAY, track_no, max_carol_duration_ms));
     events.push_back(new PlayerEvent(EVT_FADE_OUT, track_no, fade_out_duration_ms));

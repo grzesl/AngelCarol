@@ -4,6 +4,10 @@
 #include <list>
 #include <player_event.h>
 
+#define GOOD_BLESS_YOU  17
+#define BELLS           1
+#define WELCOME         4
+
 class DFRobotDFPlayerMini;
 
 class AngelCarolPlayer

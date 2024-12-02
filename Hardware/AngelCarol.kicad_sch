@@ -3916,10 +3916,6 @@
 		(uuid "ecf28d77-fd05-40c4-a348-986b4ef1815a")
 	)
 	(no_connect
-		(at 139.7 109.22)
-		(uuid "0d7e8f1e-19b2-4315-9c8c-8a7c26bd983e")
-	)
-	(no_connect
 		(at 111.76 99.06)
 		(uuid "1761b012-c29e-47f3-8d0a-8b140f3b15fd")
 	)
@@ -3944,7 +3940,7 @@
 		(uuid "51012d5a-63e2-4880-8660-4179074b68c9")
 	)
 	(no_connect
-		(at 139.7 106.68)
+		(at 139.7 109.22)
 		(uuid "735e338c-99a6-4540-8525-553c9afb03ef")
 	)
 	(no_connect
@@ -3966,6 +3962,10 @@
 	(no_connect
 		(at 205.74 118.11)
 		(uuid "ae0825c5-b63e-4316-bcd6-72da3daef6a3")
+	)
+	(no_connect
+		(at 111.76 106.68)
+		(uuid "c1b8be74-a727-471c-812b-ecfed4665170")
 	)
 	(no_connect
 		(at 227.33 125.73)
@@ -5049,22 +5049,22 @@
 	)
 	(global_label "COIN_DET_SIG"
 		(shape input)
-		(at 111.76 106.68 180)
+		(at 139.7 106.68 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "e8bacfe4-2aab-47c6-8fdd-488cfe4c528f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 95.8329 106.68 0)
+			(at 155.6271 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 				(hide yes)
 			)
 		)

@@ -16,6 +16,7 @@ DFRobotDFPlayerMini DFPlayer;
 AngelCarolPlayer ACPlayer;
 
 volatile int coinCounter = 0;
+static uint32_t stop_relay = 0;
 
 void coinIrq()
 {
@@ -57,20 +58,20 @@ void setup()
   pinMode(COIN_DET, INPUT);
   attachInterrupt(COIN_DET,coinIrq,RISING);
 
-
+	digitalWrite(RELAY, HIGH);
+  stop_relay = millis() + 60000;
   interrupts(); // enable interrupts
 }
 
 void loop()
 {
-
-  digitalWrite(BOARD_LED, HIGH);
-
   uint32_t volume_set    = analogRead(VOL_SET)/34; // (0-1023)/34 = 0-30
-  uint32_t max_play_time = analogRead(TIME_SET)*50;// 0-1023
+  uint32_t max_play_time = analogRead(TIME_SET)*60;// 0-1023
 
   static uint32_t previous_volume = 0;
   static uint32_t previous_duration = 0;
+  static uint32_t blink = 0;
+
   if(volume_set>30)
 	  volume_set = 30;
 
@@ -89,9 +90,20 @@ void loop()
   if(getCoinCount()) {
 	  digitalWrite(RELAY, HIGH);
 	  ACPlayer.insertCoin();
+    stop_relay = millis() + ACPlayer.getMaxCarolDuration() + 10000;
   }
 
+  if(stop_relay != 0 && stop_relay < millis()) // for giving some extra time to put coin, an to prevent fast on/off
+  {
+		digitalWrite(RELAY, LOW);
+    stop_relay = 0;
+  }
+  
   ACPlayer.process();
 
-  digitalWrite(BOARD_LED, LOW);
+  if(blink % 100 == 0) 
+    digitalWrite(BOARD_LED, LOW);
+  if(blink % 100 == 50) 
+    digitalWrite(BOARD_LED, HIGH);
+  blink ++;
 }

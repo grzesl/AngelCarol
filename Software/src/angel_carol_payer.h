@@ -38,6 +38,7 @@ public:
     void playIntro();
     void playCarol(int track_no);
     int isPlaying();
+    int getMaxCarolDuration();
 
 };
 

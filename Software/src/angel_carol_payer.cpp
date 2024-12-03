@@ -149,3 +149,7 @@ int AngelCarolPlayer::isPlaying()
         return 1;
     return 0;
 }
+
+int AngelCarolPlayer::getMaxCarolDuration(){
+    return max_carol_duration_ms + fade_in_duration_ms + fade_out_duration_ms;
+}

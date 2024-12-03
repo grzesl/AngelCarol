@@ -59,8 +59,10 @@ void setup()
   attachInterrupt(COIN_DET,coinIrq,RISING);
 
 	digitalWrite(RELAY, HIGH);
-  stop_relay = millis() + 60000;
+  
   interrupts(); // enable interrupts
+
+  stop_relay = millis() + 60000;
 }
 
 void loop()

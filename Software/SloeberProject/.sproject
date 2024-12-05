@@ -1,6 +1,6 @@
 Config.Release.board.BOARD.ID=GenC0
 Config.Release.board.BOARD.MENU.dbg=enable
-Config.Release.board.BOARD.MENU.opt=ogstd
+Config.Release.board.BOARD.MENU.opt=osstd
 Config.Release.board.BOARD.MENU.pnum=GENERIC_C011F6PX
 Config.Release.board.BOARD.MENU.rtlib=nano
 Config.Release.board.BOARD.MENU.upload_method=swdMethod

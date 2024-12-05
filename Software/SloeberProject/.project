@@ -52,6 +52,11 @@
 			<locationURI>ECLIPSE_HOME/arduinoPlugin/libraries/DFRobotDFPlayerMini/1.0.6</locationURI>
 		</link>
 		<link>
+			<name>libraries/IWatchdog</name>
+			<type>2</type>
+			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/IWatchdog</locationURI>
+		</link>
+		<link>
 			<name>libraries/SrcWrapper</name>
 			<type>2</type>
 			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/STMicroelectronics/hardware/stm32/2.8.1/libraries/SrcWrapper</locationURI>

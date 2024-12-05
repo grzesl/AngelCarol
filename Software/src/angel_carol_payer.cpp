@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <DFRobotDFPlayerMini.h>
 #include "angel_carol_payer.h"
+#include <IWatchdog.h>
 
 AngelCarolPlayer::AngelCarolPlayer(/* args */)
 {
@@ -52,6 +53,7 @@ void AngelCarolPlayer::process()
 
     if (currentEvent == NULL)
     {
+    	IWatchdog.reload();
         return;
     }
 
@@ -78,12 +80,14 @@ void AngelCarolPlayer::process()
         break;
     case EVT_PLAY:
         // dfplayer->play(currentEvent->getTrack());
+    	IWatchdog.reload();
         delay(10);
         if (currentEvent->isPending())
             digitalWrite(PA_8, LOW);
         break;
     default:
         dfplayer->stop();
+        delay(100);
         break;
     }
 
@@ -115,7 +119,7 @@ int AngelCarolPlayer::suffle()
     int newTrack  = 0;
     do{
         newTrack = random(1, max_track_no);
-    } while(newTrack != prev_track_no);
+    } while(newTrack == prev_track_no);
     prev_track_no = newTrack;
     return newTrack;
 }

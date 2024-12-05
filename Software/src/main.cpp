@@ -3,6 +3,7 @@
 
 #include "angel_carol_payer.h"
 #include "board_def.h"
+#include <IWatchdog.h>
 
 
 #ifdef STM32C0xx
@@ -40,6 +41,8 @@ int getCoinCount(void)
 
 void setup()
 {
+	IWatchdog.begin(20000000); // about 10sec
+
   Serial1.begin(9600);
   if (!DFPlayer.begin(Serial1)) {
     while(true){

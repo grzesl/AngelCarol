@@ -24,6 +24,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AngelCarol/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AngelCarol/libraries/SrcWrapper/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AngelCarol/libraries/DFRobotDFPlayerMini}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AngelCarol/libraries/IWatchdog/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.2032010396" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
@@ -34,6 +35,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AngelCarol/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AngelCarol/libraries/SrcWrapper/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AngelCarol/libraries/DFRobotDFPlayerMini}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AngelCarol/libraries/IWatchdog/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.787357227" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
@@ -43,6 +45,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AngelCarol/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AngelCarol/libraries/SrcWrapper/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AngelCarol/libraries/DFRobotDFPlayerMini}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AngelCarol/libraries/IWatchdog/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.858499478" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>
@@ -103,4 +106,5 @@
 			<resource resourceType="PROJECT" workspacePath="/AngelCarol"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

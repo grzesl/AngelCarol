@@ -77,11 +77,7 @@ void loop()
   if(volume_set>30)
 	  volume_set = 30;
 
-  if(previous_volume!=volume_set)
-  {
-	  ACPlayer.setVolume(volume_set);
-    previous_volume = volume_set;
-  }
+  ACPlayer.setVolume(volume_set);
   
   if(previous_duration!=max_play_time)
   {

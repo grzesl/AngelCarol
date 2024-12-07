@@ -4,9 +4,9 @@
 #include <list>
 #include <player_event.h>
 
-#define GOOD_BLESS_YOU  17
-#define BELLS           1
-#define WELCOME         4
+#define GOOD_BLESS_YOU  15
+#define BELLS           17
+//#define WELCOME         17
 
 class DFRobotDFPlayerMini;
 

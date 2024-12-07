@@ -14,7 +14,7 @@ AngelCarolPlayer::AngelCarolPlayer(/* args */)
     fade_out_duration_ms = 2000;   // 2 sec
     fade_in_duration_ms = 400;     // 1 sec
     current_track = 0;             // none
-    max_track_no = 15;
+    max_track_no = 14;
     prev_track_no = 0;
     last_insert_coint_time = 0;
 
@@ -47,7 +47,7 @@ void AngelCarolPlayer::process()
         currentEvent->start();
         if (currentEvent->getType() == EVT_FADE_IN)
         {
-            dfplayer->play(currentEvent->getTrack());
+            dfplayer->playMp3Folder(currentEvent->getTrack());
         }
     }
 
@@ -133,9 +133,9 @@ void AngelCarolPlayer::begin(DFRobotDFPlayerMini *in_dfplayer)
 
 void AngelCarolPlayer::playIntro()
 {
-    events.push_back(new PlayerEvent(EVT_FADE_IN, WELCOME, fade_in_duration_ms));
-    events.push_back(new PlayerEvent(EVT_PLAY, WELCOME, max_intro_duration_ms));
-    events.push_back(new PlayerEvent(EVT_FADE_OUT, WELCOME, fade_out_duration_ms));
+    events.push_back(new PlayerEvent(EVT_FADE_IN, BELLS, fade_in_duration_ms));
+    events.push_back(new PlayerEvent(EVT_PLAY, BELLS, max_intro_duration_ms));
+    events.push_back(new PlayerEvent(EVT_FADE_OUT, BELLS, fade_out_duration_ms));
 }
 
 void AngelCarolPlayer::playCarol(int track_no)
